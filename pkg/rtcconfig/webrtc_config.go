@@ -321,6 +321,12 @@ done:
 					"external", mapping.externalIP,
 					"local", local,
 					"ignore", mapping.localIP)
+
+				if rtcConf.UseNodeIPAsExternalIP {
+					logger.Warnw("several local IP addresses were detected along with rtc.use_node_ip_as_external_ip, "+
+						"it may cause client's connection issues, from start to start the server, heisenbug-like, "+
+						"please consider filtering the IP addresses out via rtc.ips.excludes", nil)
+				}
 			} else {
 				natMapping[mapping.externalIP] = mapping.localIP
 				mappedIPs = append(mappedIPs, mapping.localIP)
