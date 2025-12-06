@@ -107,6 +107,7 @@ func NewWebRTCConfig(rtcConf *RTCConfig, development bool) (*WebRTCConfig, error
 			}
 			nat1to1IPs = ips
 		} else if len(rtcConf.NAT1to1IPs) != 0 {
+			logger.Infow("using the provided NAT mapping", "ips", rtcConf.NAT1to1IPs)
 			s.SetNAT1To1IPs(rtcConf.NAT1to1IPs, webrtc.ICECandidateTypeHost)
 		} else {
 			s.SetNAT1To1IPs([]string{rtcConf.NodeIP}, webrtc.ICECandidateTypeHost)
